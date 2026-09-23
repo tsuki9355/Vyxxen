@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#091d2a" />
+    <meta name="description" content="Vyxxen — an isometric arcade flight mission over an offshore frontier." />
+    <title>VYXXEN / Offshore Run</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <main id="app">
+      <div id="scene" aria-label="Three-dimensional flight game"></div>
+      <div class="vignette"></div>
+      <header class="masthead">
+        <a class="wordmark" href="./" aria-label="Vyxxen home">VY<span>XX</span>EN<span class="wordmark-dot">®</span></a>
+        <div class="edition"><i></i> FLIGHT SYSTEMS ONLINE <span> / </span> PROTOTYPE 0.1</div>
+        <button id="sound-button" class="icon-button" aria-label="Mute sound" title="Toggle sound">SOUND <span id="sound-label">ON</span></button>
+      </header>
+
+      <section id="title-screen" class="screen title-screen">
+        <div class="title-copy">
+          <div class="eyebrow"><span class="orange-line"></span> ONE SHIP. ONE WAY THROUGH.</div>
+          <h1>LOW ALTITUDE.<br>HIGH <span>STAKES.</span></h1>
+          <p class="intro">An offshore frontier. A dwindling fuel tank.<br>Carve your line through the machinery.</p>
+          <button id="start-button" class="primary-button">LAUNCH MISSION <span>↗</span></button>
+          <div class="launch-note"><span class="key">↵</span> ENTER TO LAUNCH <span class="note-divider">/</span> ~6 MIN FLIGHT</div>
+          <div class="mission-card">
+            <div class="mission-card-top"><span class="tiny-label">YOUR ASSIGNMENT</span><span class="mission-index">01 / 01</span></div>
+            <h2>Offshore Run <span>↗</span></h2>
+            <div class="mission-tags"><span>3 SECTORS</span><span>2 CHECKPOINTS</span><span>3 LIVES</span></div>
+            <div class="mini-route"><i></i><span></span><i></i><span></span><i class="route-end"></i></div>
+            <div class="route-labels"><span>THE APPROACH</span><span>OIL FIELDS</span><span>LAST LIGHT</span></div>
+          </div>
+        </div>
+        <div class="ship-callout"><span class="callout-line"></span><div><span class="tiny-label">VX–01 / INTERCEPTOR</span><strong>Built to thread the needle.</strong></div></div>
+        <div class="scene-coordinate">N 58° 21′ &nbsp; E 02° 14′<br><span>NORTH SEA / RESTRICTED AIRSPACE</span></div>
+      </section>
+
+      <section id="hud" class="hidden" aria-label="Flight instruments">
+        <div class="hud-top">
+          <div class="sector-panel"><span class="tiny-label" id="sector-number">SECTOR 01 / 03</span><h2 id="sector-name">The Approach</h2><span id="checkpoint-label">CHECKPOINT / DEPARTURE</span></div>
+          <div class="score-panel"><span class="tiny-label">MISSION SCORE</span><strong id="score">000000</strong><div><span id="lives">▲ ▲ ▲</span><span id="timer">00:00</span><button id="pause-button" class="icon-button" aria-label="Pause game">Ⅱ</button></div></div>
+        </div>
+        <div class="altimeter"><span class="tiny-label">ALT</span><div class="alt-track"><div class="alt-zone high"></div><div class="alt-zone mid"></div><div class="alt-zone low"></div><i id="alt-marker"></i></div><div class="alt-labels"><span>HIGH</span><span>MID</span><span>LOW</span></div></div>
+        <div id="notice" role="status"></div>
+        <div id="refuel-indicator" class="hidden"><span class="refuel-spinner">✳</span> REFUELING <span id="refuel-value">0%</span></div>
+        <div class="hud-bottom">
+          <div class="fuel-panel"><div><span class="tiny-label">FUEL RESERVE</span><strong id="fuel-value">100<span>%</span></strong></div><div class="fuel-track"><div id="fuel-fill"></div></div><span id="fuel-hint">LOW + GREEN PAD TO REFUEL</span></div>
+          <div class="progress-panel"><div><span class="tiny-label">RUNWAY PROGRESS</span><span id="progress-value">0%</span></div><div class="progress-track"><i></i><i></i><div id="progress-fill"></div></div><div class="progress-labels"><span>DEPARTURE</span><span>01</span><span>02</span><span>FINISH ↗</span></div></div>
+          <div class="weapon-panel"><span class="tiny-label">WEAPON SYSTEM</span><strong id="weapon-name">↑ &nbsp; SINGLE SHOT</strong><span id="flight-state">CRUISE / 20</span></div>
+        </div>
+      </section>
+
+      <section id="pause-screen" class="screen modal-screen hidden" aria-labelledby="pause-title">
+        <div class="modal"><span class="eyebrow">FLIGHT ON HOLD</span><h1 id="pause-title">Catch your<br><span>breath.</span></h1><p>Your mission is right where you left it.</p><button id="resume-button" class="primary-button">RESUME FLIGHT <span>↗</span></button><button id="restart-button" class="secondary-button">RESTART MISSION</button><span class="modal-note">ESC TO RESUME</span></div>
+      </section>
+      <section id="results-screen" class="screen modal-screen hidden" aria-labelledby="result-title">
+        <div class="modal result-modal"><span id="result-eyebrow" class="eyebrow">TRANSMISSION ENDED</span><h1 id="result-title">Signal<br><span>lost.</span></h1><p id="result-description">The offshore frontier takes another.</p><div class="result-stats"><div><span>SCORE</span><strong id="result-score">0</strong></div><div><span>FLIGHT TIME</span><strong id="result-time">00:00</strong></div><div><span>TARGETS</span><strong id="result-targets">0</strong></div></div><button id="replay-button" class="primary-button">FLY AGAIN <span>↗</span></button><button id="home-button" class="secondary-button">BACK TO BASE</button></div>
+      </section>
+
+      <footer class="controls-bar"><div class="control-group"><span class="key">W A S D</span><span class="control-alt">/ ↑ ← ↓ →</span><span>MOVE</span></div><div class="control-group"><span class="key">SPACE</span><span>FIRE</span></div><div class="control-group"><span class="key">SHIFT</span><span>SLOW</span></div><div class="control-group"><span class="key">ESC</span><span>PAUSE</span></div><div class="gamepad-label"><i id="gamepad-dot"></i><span id="gamepad-label">GAMEPAD READY</span></div><span class="footer-tag">STAY LOW. AIM HIGH.</span></footer>
+      <div id="error-screen" class="hidden" role="alert"></div>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
